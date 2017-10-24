@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Page Title</title>
+   </head>
+   <body>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <h1>Gif image search</h1>
+      <div id="problemform" class="form-inline">
+         <input id="probleminput" class="form-inline" placeholder="Enter your keyword" type="text" style="display: inline;" value="hello"></input>
+         <button id="problemsubmit" class="btn" style="display: inline-block;">Submit</button>
+      </div>
+      <div>
+         Showing
+         <h2 id="resultCount">0</h2>
+         results
+         <div>
+            <img src="" id="picture1" />
+            <img src="" id="picture2" />
+            <img src="" id="picture3" />
+            <img src="" id="picture4" />
+            <img src="" id="picture5" />
+            <img src="" id="picture6" />
+         </div>
+      </div>
+      <script>
+         $('#problemsubmit').on('click', function(event) {
+           event.preventDefault();
+           var formInput = $('#probleminput').val();
+         
+           var xhr = $.get("https://api.giphy.com/v1/gifs/search?q=" + formInput + "&api_key=o1H3Da15oqhgM3WlAhPnQYJV8g9l3NdV&limit=6");
+           xhr.done(function(data) {
+             $('#resultCount').html(data.data.length);
+             var imageString = data.data[0].images.original.url;
+         	var imageString1 = data.data[1].images.original.url;
+         	var imageString2 = data.data[2].images.original.url;
+         	var imageString3 = data.data[3].images.original.url;
+         	var imageString4 = data.data[4].images.original.url;
+         	var imageString5 = data.data[5].images.original.url;
+             $('#picture1').attr('src', imageString);
+         	$('#picture2').attr('src', imageString1);
+         	$('#picture3').attr('src', imageString2);
+         	$('#picture4').attr('src', imageString3);
+         	$('#picture5').attr('src', imageString4);
+         	$('#picture6').attr('src', imageString5);
+           });
+         });
+      </script>
+   </body>
+</html>
